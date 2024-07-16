@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,41 +37,55 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("안녕하세요"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () => print("gesture detect on tap"),
-              child: Container(
-                width: 200,
-                height: 200,
-                color: Colors.amber,
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print('Button clicked!');
-              },
-              child: Text('Click Me'),
-            ),
-            GestureDetector(
-              onTap: () => print("gesture detect on tap 3"),
-              onDoubleTap: () => print('Container double-clicked!'),
-              onLongPress: () => print('Container long-pressed!'),
-              child: Container(
-                width: 200,
-                height: 200,
-                child: const Center(
-                  child: Text(
-                    'Tap me',
-                    style: TextStyle(color: Colors.red, fontSize: 20),
-                  ),
+      body: ListView(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+                "title 1",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
                 ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            color: Colors.red,
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              "title 1",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            color: Colors.red,
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              "title 1",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            color: Colors.red,
+          )
+        ],
+      )
     );
   }
 }
