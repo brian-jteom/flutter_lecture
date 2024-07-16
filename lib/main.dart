@@ -35,25 +35,44 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("안녕하세요"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const <Widget>[
-            ListTile(
-              title: Text("Menu 1"),
-            ),
-            DrawerHeader(
-                decoration: BoxDecoration(
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 200,
                   color: Colors.blue,
                 ),
-                child: Text("Drawer Header Part"))
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 200,
+                  color: Colors.red,
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 200,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: 200,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ],
         ),
-      ),
-      body: const Center(child: Text("HELLO WORLD")),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => print("click click"),
-        child: const Icon(Icons.mouse),
       ),
     );
   }
