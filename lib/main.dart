@@ -35,39 +35,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("안녕하세요"),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.yellow,
-        child: Stack(
+      body: Center(
+        child: Column(
           children: [
-            Container(
-              width: 150,
-              height: 200,
-              color: Colors.red,
-            ),
-            Container(
-              width: 150,
-              height: 200,
-              margin: const EdgeInsets.only(top: 50, left: 50),
-              color: Colors.blue,
-            ),
-            Positioned(
-              left: 100,
-              top: 100,
-              // right: 10,
-              // bottom: 10,
+            GestureDetector(
+              onTap: () => print("gesture detect on tap"),
               child: Container(
-                width: 150,
+                width: 200,
                 height: 200,
-                color: Colors.green,
+                color: Colors.amber,
               ),
             ),
-            Container(
-              width: 150,
-              height: 200,
-              margin: const EdgeInsets.only(top: 150, left: 150),
-              color: Colors.orange,
+            ElevatedButton(
+              onPressed: () {
+                print('Button clicked!');
+              },
+              child: Text('Click Me'),
+            ),
+            GestureDetector(
+              onTap: () => print("gesture detect on tap 3"),
+              onDoubleTap: () => print('Container double-clicked!'),
+              onLongPress: () => print('Container long-pressed!'),
+              child: Container(
+                width: 200,
+                height: 200,
+                child: const Center(
+                  child: Text(
+                    'Tap me',
+                    style: TextStyle(color: Colors.red, fontSize: 20),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
