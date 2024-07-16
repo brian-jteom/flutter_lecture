@@ -52,11 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
               margin: const EdgeInsets.only(top: 50, left: 50),
               color: Colors.blue,
             ),
-            Container(
-              width: 150,
-              height: 200,
-              margin: const EdgeInsets.only(top: 100, left: 100),
-              color: Colors.green,
+            Positioned(
+              left: 100,
+              top: 100,
+              // right: 10,
+              // bottom: 10,
+              child: Container(
+                width: 150,
+                height: 200,
+                color: Colors.green,
+              ),
             ),
             Container(
               width: 150,
