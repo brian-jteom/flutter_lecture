@@ -32,34 +32,57 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  final postList = [
+    {
+      "number": 1,
+      "colorData": Colors.green
+    },
+    {
+      "number": 2,
+      "colorData": Colors.blue
+    },
+    {
+      "number": 3,
+      "colorData": Colors.amberAccent
+    },
+    {
+      "number": 4,
+      "colorData": Colors.cyan
+    },
+    {
+      "number": 5,
+      "colorData": Colors.cyan
+    },
+    {
+      "number": 6,
+      "colorData": Colors.amberAccent
+    },
+    {
+      "number": 7,
+      "colorData": Colors.green
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text("안녕하세요"),
         ),
-        body: GridView(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 개수
-            crossAxisSpacing: 15.0, // 주석 해보기 (가로 행간 길이)
-            mainAxisSpacing: 12.0 // 주석 해보기(세로 행간 길이)
-          ),
-          children: [
-            postContainer(number: 1, colorData: Colors.green),
-            postContainer(number: 2, colorData: Colors.amberAccent),
-            postContainer(number: 3, colorData: Colors.green),
-            postContainer(number: 4, colorData: Colors.cyan),
-            postContainer(number: 5, colorData: Colors.green),
-            postContainer(number: 6, colorData: Colors.amberAccent),
-            postContainer(number: 7, colorData: Colors.green),
-            postContainer(number: 8, colorData: Colors.cyan),
-            postContainer(number: 9, colorData: Colors.green),
-            postContainer(number: 10, colorData: Colors.amberAccent),
-            postContainer(number: 11, colorData: Colors.green),
-            postContainer(number: 12, colorData: Colors.cyan),
-          ],
-        )
-    );
+        body:  GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15.0,
+                mainAxisSpacing: 12.0
+              ),
+              itemCount: postList.length,
+              itemBuilder: (BuildContext con, int index) {
+                return postContainer(
+                  number: postList[index]["number"] as int,
+                  colorData: postList[index]["colorData"] as Color
+                );
+              }),
+        );
   }
 
   Widget postContainer({int number = 0, Color colorData = Colors.amber}) {
