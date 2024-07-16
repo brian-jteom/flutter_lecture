@@ -45,20 +45,28 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSpacing: 12.0 // 주석 해보기(세로 행간 길이)
           ),
           children: [
-            postContainer(),
-            postContainer(),
-            postContainer(),
-            postContainer()
+            postContainer(number: 1, colorData: Colors.green),
+            postContainer(number: 2, colorData: Colors.amberAccent),
+            postContainer(number: 3, colorData: Colors.green),
+            postContainer(number: 4, colorData: Colors.cyan),
+            postContainer(number: 5, colorData: Colors.green),
+            postContainer(number: 6, colorData: Colors.amberAccent),
+            postContainer(number: 7, colorData: Colors.green),
+            postContainer(number: 8, colorData: Colors.cyan),
+            postContainer(number: 9, colorData: Colors.green),
+            postContainer(number: 10, colorData: Colors.amberAccent),
+            postContainer(number: 11, colorData: Colors.green),
+            postContainer(number: 12, colorData: Colors.cyan),
           ],
         )
     );
   }
 
-  Widget postContainer() {
+  Widget postContainer({int number = 0, Color colorData = Colors.amber}) {
     return Container(
             height: 200,
-            color: Colors.amber,
-            child: Center(child: Text("Box")),
+            color: colorData,
+            child: Center(child: Text("Box $number")),
           );
   }
 
