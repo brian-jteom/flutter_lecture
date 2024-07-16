@@ -31,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,53 +40,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-                "title 1",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-                ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            color: Colors.red,
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              "title 1",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            color: Colors.red,
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              "title 1",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            color: Colors.red,
-          )
+          postContainer(title: "title 1"),
+          postContainer(title: "title 2", colorData: Colors.blue),
+          postContainer(title: "title 3", colorData: Colors.green)
         ],
       )
+    );
+  }
+
+  Widget postContainer({String title = '', Color colorData = Colors.red}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            title,
+            style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 100,
+          color: colorData,
+        )
+      ],
     );
   }
 }
