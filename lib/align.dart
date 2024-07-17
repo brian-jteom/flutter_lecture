@@ -17,44 +17,35 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: Stack(
           children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.black12,
+            ),
             Align(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.bottomLeft,
                 child: Container(
-                  width: 100,
-                  height: 100,
-                  alignment: Alignment.center,
-                  color: Colors.yellow,
-                  child: Text("왼쪽"),
+                  width: MediaQuery.of(context).size.width,
+                  height: 150,
+                  color: Colors.brown
                 )
             ),
             Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  alignment: Alignment.center,
-                  color: Colors.yellow,
-                  child: Text("중앙"),
-                )
-            ),
-            Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.bottomLeft,
               child: Container(
+                  margin: const EdgeInsets.only(left: 40, bottom: 150),
                   width: 100,
                   height: 100,
-                  alignment: Alignment.center,
-                  color: Colors.yellow,
-                  child: Text("오른쪽"),
+                  color: Colors.yellow
               )
             ),
             Align(
                 alignment: Alignment.center,
                 child: Container(
-                  width: 100,
-                  height: 100,
-                  alignment: Alignment.center,
-                  color: Colors.yellow,
-                  child: Text("정중앙"),
+                  margin: const EdgeInsets.only(bottom: 200),
+                  width: 200,
+                  height: 70,
+                  color: Colors.lightBlue[200],
                 )
             )
           ],
