@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'flexible.dart';
+import 'gradient.dart';
 
 void main() {
   runApp(const MyApp());
