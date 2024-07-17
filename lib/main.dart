@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'align.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,54 +24,5 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("안녕하세요"),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              buildSizedBox(context),
-              buildSizedBox(context),
-              buildSizedBox(context),
-            ]
-          ),
-        )
-    );
-  }
-
-  SizedBox buildSizedBox(BuildContext context) {
-    return SizedBox(
-              height: MediaQuery.of(context).size.height / 3,
-              child: SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300,
-                          color: Colors.green,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 300,
-                          color: Colors.yellow,
-                        )
-                      ]
-                  )
-              ),
-            );
-  }
-
-}
 
