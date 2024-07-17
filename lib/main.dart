@@ -32,65 +32,29 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final postList = [
-    {
-      "number": 1,
-      "colorData": Colors.green
-    },
-    {
-      "number": 2,
-      "colorData": Colors.blue
-    },
-    {
-      "number": 3,
-      "colorData": Colors.amberAccent
-    },
-    {
-      "number": 4,
-      "colorData": Colors.cyan
-    },
-    {
-      "number": 5,
-      "colorData": Colors.cyan
-    },
-    {
-      "number": 6,
-      "colorData": Colors.amberAccent
-    },
-    {
-      "number": 7,
-      "colorData": Colors.green
-    }
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text("안녕하세요"),
         ),
-        body:  GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15.0,
-                mainAxisSpacing: 12.0
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                color: Colors.green,
               ),
-              itemCount: postList.length,
-              itemBuilder: (BuildContext con, int index) {
-                return postContainer(
-                  number: postList[index]["number"] as int,
-                  colorData: postList[index]["colorData"] as Color
-                );
-              }),
-        );
-  }
-
-  Widget postContainer({int number = 0, Color colorData = Colors.amber}) {
-    return Container(
-            height: 200,
-            color: colorData,
-            child: Center(child: Text("Box $number")),
-          );
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                color: Colors.yellow,
+              )
+            ],
+          ),
+        )
+    );
   }
 
 }
