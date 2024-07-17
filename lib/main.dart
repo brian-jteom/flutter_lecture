@@ -41,9 +41,19 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-                child: SingleChildScrollView(
+              buildSizedBox(context),
+              buildSizedBox(context),
+              buildSizedBox(context),
+            ]
+          ),
+        )
+    );
+  }
+
+  SizedBox buildSizedBox(BuildContext context) {
+    return SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              child: SingleChildScrollView(
                   child: Column(
                       children: [
                         Container(
@@ -58,50 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         )
                       ]
                   )
-                ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-                child: SingleChildScrollView(
-                    child: Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
-                            color: Colors.yellow,
-                          )
-                        ]
-                    )
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-                child: SingleChildScrollView(
-                    child: Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
-                            color: Colors.green,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 300,
-                            color: Colors.yellow,
-                          )
-                        ]
-                    )
-                ),
-              ),
-            ]
-          ),
-        )
-    );
+            );
   }
 
 }
