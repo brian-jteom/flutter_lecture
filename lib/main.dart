@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'alert_dialog.dart';
+import 'image.dart';
 
 void main() {
   runApp(const MyApp());
