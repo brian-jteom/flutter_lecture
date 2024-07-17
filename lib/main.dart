@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'align.dart';
+import 'alert_dialog.dart';
 
 void main() {
   runApp(const MyApp());
