@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'shared_preferences.dart';
+import 'bottom_navigator_bar.dart';
 
 void main() {
   runApp(const MyApp());
