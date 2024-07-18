@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -15,14 +16,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  static Future loadJson() async {
-    final String response = await rootBundle.loadString("lib/users.json");
-    final data = await json.decode(response);
-    return data['users'];
+  late SharedPreferences _prefs;
+  String _username = "";
+  final TextEditingController _userController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _getUsername();
   }
 
-  Future userList = loadJson();
-  
+  _saveUsername() {
+    setState(() {
+      _username = _userController.text;
+      _prefs.setString("currentUsername", _username);
+    });
+  }
+
+  _getUsername() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _username = _prefs.getString("currentUsername") ?? "";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,35 +47,27 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text("test title"),
         ),
         body: Container(
-          child: FutureBuilder(
-            future: userList,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                            "${snapshot.data[index]["id"]}: ${snapshot.data[index]["username"]}"
-                        ),
-                      );
-                    }
-                );
-              } else if (snapshot.hasError) {
-                return const Center(
-                  child: Text("Error"),
-                );
-              } else {
-                return const Center(
-                    child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                    )
-                );
-              }
-            },
+          child: Column(
+            children: [
+              Text("현재 사용자 이름 : $_username" ),
+              Container(
+                child: TextField(
+                  controller: _userController,
+                  textAlign: TextAlign.left,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Input your username'
+                  ),
+                ),
+              ),
+              TextButton(
+                  onPressed: () => _saveUsername()
+                  , child: Text('저장')
+              )
+            ],
           ),
         )
+
     );
   }
 }
