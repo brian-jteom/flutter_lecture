@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'view/album_provider_view.dart';
+import 'package:flutter_lecture/locator/locator.dart';
+import 'view/album_getit_view.dart';
 
 void main() {
+  initLocator();
   runApp(const MyApp());
 }
 
