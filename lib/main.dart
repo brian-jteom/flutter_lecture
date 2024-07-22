@@ -1,12 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'notification.dart';
-import 'notification_view.dart';
+import 'webview.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await FlutterLocalNotification.init();  // 플러그인 초기화
+void main() {
   runApp(const MyApp());
 }
 
