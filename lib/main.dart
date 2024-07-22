@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'bottom_navigator_bar.dart';
+import 'refresh_indicator.dart';
 
 void main() {
   runApp(const MyApp());
