@@ -1,8 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'form_success_page.dart';
-import 'form_home_page.dart';
+import 'listview_scroll_pagination.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,11 +19,11 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      routes: {
-        '/': (context) => const MyHomePage(),
-        '/success': (context) => const SuccessPage(),
-      },
-      // home: const MyHomePage(),
+      // routes: {
+      //   '/': (context) => const MyHomePage(),
+      //   '/success': (context) => const SuccessPage(),
+      // },
+      home: const MyHomePage(),
     );
   }
 }

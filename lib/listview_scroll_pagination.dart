@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -7,25 +10,80 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  
-  late TabController _tabController;
-  int _selectedIndex = 0;
-  
+class _MyHomePageState extends State<MyHomePage>  {
+
+  final _url = 'https://jsonplaceholder.typicode.com/albums';
+  int _page = 1;
+  final int _limit = 20;
+  bool _hasNextPage = true; // 다음 페이지가 있는지 여부
+  bool _isFirstLoadRunning = false; // 첫번째 페이지 로딩중
+  bool _isLoadMoreRunning = false; // 다음페이지 로딩중
+  List _albumList = [];
+  late ScrollController _controller;
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(
-      () => setState(() => _selectedIndex = _tabController.index)
-    );
+    initLoad();
+    _controller = ScrollController()..addListener(_nextLoad);
+  }
+
+
+  void initLoad() async {
+    setState(() {
+      _isFirstLoadRunning = true;
+    });
+    try {
+      final res = await http.get(Uri.parse("$_url?_page=$_page&_limit=$_limit"));
+      setState(() {
+        _albumList = jsonDecode(res.body);
+      });
+
+    } catch(e) {
+      print(e.toString());
+    }
+
+    setState(() {
+      _isFirstLoadRunning = false;
+    });
+  }
+
+  void _nextLoad() async {
+    print("nextLoad");
+    if(_hasNextPage && !_isFirstLoadRunning && !_isLoadMoreRunning
+      && _controller.position.extentAfter < 100) {
+      setState(() {
+        _isLoadMoreRunning = true;
+      });
+      _page += 1;
+      try {
+        final res = await http.get(Uri.parse("$_url?_page=$_page&_list=$_limit"));
+        final List fetchedAlbums = json.decode(res.body);
+        if(fetchedAlbums.isNotEmpty) {
+          setState(() {
+            _albumList.addAll(fetchedAlbums);
+          });
+        } else { // 데이터가 비어있는 경우
+          setState(() {
+            _hasNextPage = false;
+          });
+        }
+      } catch(e) {
+        print(e.toString());
+      }
+
+      setState(() {
+        _isLoadMoreRunning = false;
+      });
+
+    }
   }
 
   // 페이지 종료 시 종료해 주는 기능
   @override
   void dispose() {
     super.dispose();
-
+    _controller.removeListener(_nextLoad);
   }
 
   @override
@@ -34,54 +92,46 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         appBar: AppBar(
           title: const Text("test title"),
         ),
-        body: _selectedIndex == 0
-      ? tabContainer(context, Colors.indigo, "Friends Tab")
-        : _selectedIndex == 1 ? tabContainer(context, Colors.yellow, "Chats Tab")
-        : tabContainer(context, Colors.blue, "Setting Tab"),
-      bottomNavigationBar: SizedBox(
-        height: 90,
-        child: TabBar(
-          controller: _tabController,
-          labelColor: Colors.black,
-          tabs: [
-            Tab(
-             icon: Icon(
-                 _selectedIndex == 0 ? Icons.person : Icons.person_2_outlined
-             ),
-             text: "Friends",
+        body: _isFirstLoadRunning
+        ? const Center(
+          child: CircularProgressIndicator(),
+        )
+        : Column(
+          children: [
+            Expanded(
+                child: ListView.builder(
+                  controller: _controller,
+                  itemCount: _albumList.length,
+                  itemBuilder: (context, index) => Card(
+                    margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    child: ListTile(
+                      title: Text(_albumList[index]["id"].toString()),
+                      subtitle: Text(_albumList[index]["title"]),
+                    ),
+                  )
+                )
             ),
-            Tab(
-              icon: Icon(
-                  _selectedIndex == 1 ? Icons.chat : Icons.chat_outlined
+            if (_isLoadMoreRunning == true)
+              Container(
+                padding: const EdgeInsets.all(30),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                )
               ),
-              text: "Chats",
-            ),
-            Tab(
-              icon: Icon(
-                  _selectedIndex == 2 ? Icons.settings : Icons.settings_outlined
-              ),
-              text: "Settings",
-            ),
+            if (_hasNextPage == false)
+              Container(
+                  padding: const EdgeInsets.all(20),
+                  child: const Center(
+                    child: Text(
+                      "No more data to be fetched",
+                      style: TextStyle(
+                        color: Colors.white
+                      )
+                    ),
+                  )
+              )
           ],
-        ),
-      ),
+        )
     );
   }
-
-  Widget tabContainer(BuildContext con, Color tabColor, String tabText) {
-    return Container(
-      width: MediaQuery.of(con).size.width,
-      height: MediaQuery.of(con).size.height,
-      color: tabColor,
-      child: Center(
-        child: Text(
-          tabText,
-          style: const TextStyle(
-            color: Colors.white
-          ),
-        ),
-      ),
-    );
-  }
-
 }
