@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'refresh_indicator.dart';
+import 'view/album_view.dart';
 
 void main() {
   runApp(const MyApp());
