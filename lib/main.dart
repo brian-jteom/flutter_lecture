@@ -1,7 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'listview_scroll_pagination.dart';
+import 'photo_view_main.dart';
 
 void main() {
   runApp(const MyApp());
